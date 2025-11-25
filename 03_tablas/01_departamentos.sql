@@ -1,6 +1,6 @@
--- ====================
+-- =============================================
 -- TABLA: DEPARTAMENTOS
--- ====================
+-- =============================================
 
 PROMPT Creando tabla DEPARTAMENTOS...
 CREATE TABLE departamentos (
@@ -17,14 +17,20 @@ CREATE TABLE departamentos (
 
 PROMPT Agregando comentarios...
 COMMENT ON TABLE departamentos IS 'Tabla maestra de departamentos de la empresa';
-COMMENT ON COLUMN departamentos.id._departamento IS 'Identificador unico del departamento (PK)';
+COMMENT ON COLUMN departamentos.id_departamento IS 'Identificador único del departamento (PK)';
 COMMENT ON COLUMN departamentos.nombre_depto IS 'Nombre oficial del departamento';
-COMMENT ON COLUMN departamentos.presupuesto_anual IS 'Presupuesto anual asignado en pesos';
+COMMENT ON COLUMN departamentos.presupuesto_anual IS 'Presupuesto anual asignado en soles';
 
-PROMPT Creando secuencia para ID automatico...
+PROMPT Creando secuencia para ID automático...
 CREATE SEQUENCE seq_departamentos
 START WITH 1
 INCREMENT BY 1
 NOCACHE
 NOCYCLE;
 
+PROMPT Creando índice para búsquedas por nombre...
+CREATE INDEX idx_departamentos_nombre ON departamentos(nombre_depto) 
+TABLESPACE ts_empresa_idx;
+
+PROMPT === VERIFICACIÓN TABLA CREADA ===
+DESC departamentos;
